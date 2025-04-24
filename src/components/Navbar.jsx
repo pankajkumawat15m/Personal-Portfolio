@@ -20,7 +20,7 @@ function Navbar() {
       className="fixed w-full bg-dark/90 backdrop-blur-md z-50 p-4"
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div className="text-xl font-bold text-accent">LOGO</div>
+        <div className="text-xl font-bold text-accent">Pankaj Kumawat</div>
         <div className="hidden md:flex space-x-6">
           {navItems.map((item) => (
             <a
@@ -32,9 +32,13 @@ function Navbar() {
             </a>
           ))}
         </div>
-        <Button variant="outline" className="bg-accent text-dark hover:bg-accent/80">
+        <a
+          href="#contact"
+          data-email="pankajkumawat@example.com"
+          className="inline-flex items-center justify-center px-4 py-2 bg-accent text-dark font-semibold rounded-md hover:bg-accent/90 transition-all duration-300 shadow-md hover:shadow-lg"
+        >
           Hire Me
-        </Button>
+        </a>
         <div className="md:hidden">
           <Button
             variant="ghost"
@@ -60,9 +64,13 @@ function Navbar() {
                 {item.name}
               </a>
             ))}
-            <Button variant="outline" className="mt-2 w-full bg-accent text-dark">
+            <a
+              href="#contact"
+              data-email="pankajkumawat@example.com"
+              className="block mt-2 py-2 text-center bg-accent text-dark font-semibold rounded-md hover:bg-accent/90 transition-all duration-300"
+            >
               Hire Me
-            </Button>
+            </a>
           </motion.div>
         )}
       </div>

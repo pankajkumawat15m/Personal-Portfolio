@@ -2,7 +2,6 @@ import { Button } from "./ui/button";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from "react-icons/fa";
 
-
 function Hero() {
   return (
     <section
@@ -20,18 +19,30 @@ function Hero() {
           Pankaj Kumawat
         </h1>
         <h2 className="text-3xl md:text-5xl font-semibold mb-6 text-accent">
-          Full-Stack Developer & Data Scientist
+          Full-Stack Developer & AI Enthusiast
         </h2>
         <div className="flex space-x-4 mb-8">
-          <Button className="bg-accent text-dark hover:bg-accent/80">
+          <a
+            href="#contact"
+            onClick={(e) => {
+              const contactSection = document.querySelector('#contact');
+              if (!contactSection) {
+                e.preventDefault();
+                window.location.href = 'mailto:pankajkumawat@example.com?subject=Job%20Opportunity';
+              }
+            }}
+            className="inline-flex items-center justify-center px-6 py-3 bg-accent text-dark font-semibold rounded-md hover:bg-accent/90 transition-all duration-300 shadow-md hover:shadow-lg"
+          >
             Hire Me
-          </Button>
-          <Button
-            variant="outline"
-            className="text-light border-light hover:bg-gray/20"
+          </a>
+          <a
+            href="/assets/pankaj-kumawat-cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-6 py-3 border border-light text-light bg-transparent hover:bg-gray/20 rounded-md transition-colors"
           >
             Download CV
-          </Button>
+          </a>
         </div>
         <div className="flex space-x-4 text-gray">
           <a
@@ -69,14 +80,13 @@ function Hero() {
       <motion.img
         src="/assets/pankaj-photo.jpg"
         alt="Pankaj Kumawat"
-        initial={{ opacity: 0, x: 100, rotate: -15 }}
-        animate={{ opacity: 1, x: 0, rotate: 5 }}
+        initial={{ opacity: 0, x: 100, rotate: -10 }}
+        animate={{ opacity: 1, x: 0, rotate: 3 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute right-0 top-1/4 w-1/4 rounded-full border-4 border-accent shadow-2xl filter brightness-120 hover:brightness-140 transition-all duration-300"
+        className="absolute right-6 top-1/4 max-w-[300px] md:max-w-[400px] rounded-lg border-4 border-accent shadow-2xl filter brightness-110 hover:brightness-125 transition-all duration-300"
         style={{
           boxShadow:
-            "0 0 20px rgba(255, 98, 0, 0.7), 0 0 30px rgba(255, 98, 0, 0.5)",
-          marginRight: "-8%",
+            "0 0 25px rgba(255, 98, 0, 0.8), 0 0 40px rgba(255, 98, 0, 0.6)",
           zIndex: 20,
           transformOrigin: "center",
         }}
