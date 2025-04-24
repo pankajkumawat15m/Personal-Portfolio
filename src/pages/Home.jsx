@@ -5,7 +5,7 @@ import Services from "../components/Services";
 import About from "../components/About";
 import Portfolio from "../components/Portfolio";
 import Contact from "../components/Contact";
-import Experience from "../components/experience";
+import Experience from "../components/Experience";
 import Footer from "../components/Footer";
 
 
