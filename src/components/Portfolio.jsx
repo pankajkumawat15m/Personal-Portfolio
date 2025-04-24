@@ -7,7 +7,7 @@ function Portfolio() {
       title: 'TaskSync',
       image: 'https://miro.medium.com/v2/resize:fit:4800/format:webp/1*8G1vA7egoxrL4Bb7RAgnPQ.jpeg',
       github: 'https://github.com/pankajkumawat15m/TaskSync',
-      liveDemo: 'https://tasksync.vercel.app'
+      liveDemo: 'https://task-sync-orxs.vercel.app/'
     },
     {
       title: 'Movie Explorer',
