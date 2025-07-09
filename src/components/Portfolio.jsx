@@ -26,18 +26,19 @@ function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="py-16"
+      className="py-12 sm:py-16"
       style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="text-4xl font-bold text-center text-light mb-12"
+          transition={{ duration: 0.5 }}
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-light mb-8 sm:mb-12"
         >
           Portfolio
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -50,14 +51,15 @@ function Portfolio() {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-40 sm:h-48 object-cover rounded-t-lg"
+                    loading="lazy"
                   />
                 </CardHeader>
-                <CardContent>
-                  <CardTitle className="text-xl text-accent">
+                <CardContent className="p-4">
+                  <CardTitle className="text-lg sm:text-xl text-accent">
                     {project.title}
                   </CardTitle>
-                  <div className="mt-4 flex justify-between">
+                  <div className="mt-4 flex justify-between text-sm sm:text-base">
                     <a
                       href={project.github}
                       target="_blank"
@@ -70,7 +72,7 @@ function Portfolio() {
                       href={project.liveDemo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#FF6A00] hover:text-white"
+                      className="text-[#FF6A00] hover:Text-white"
                     >
                       Live Demo
                     </a>

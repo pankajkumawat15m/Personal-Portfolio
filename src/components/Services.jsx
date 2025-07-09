@@ -26,12 +26,13 @@ function Services() {
   ];
 
   return (
-    <section id="services" className="py-16 bg-dark">
+    <section id="services" className="py-12 sm:py-16 bg-dark">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="text-3xl font-bold text-center text-light mb-8"
+          transition={{ duration: 0.5 }}
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-light mb-8 sm:mb-12"
         >
           Services
         </motion.h2>
@@ -45,10 +46,10 @@ function Services() {
             >
               <Card className="bg-dark/50 border-none">
                 <CardHeader>
-                  <CardTitle className="text-xl text-accent">{service.title}</CardTitle>
+                  <CardTitle className="text-lg sm:text-xl text-accent">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-100">{service.description}</p>
+                  <p className="text-gray-100 text-sm sm:text-base">{service.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
