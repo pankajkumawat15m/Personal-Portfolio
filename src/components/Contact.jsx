@@ -6,6 +6,7 @@ import { Textarea } from "./ui/textarea";
 import { motion } from "framer-motion";
 import { Mail, Send, User } from "lucide-react";
 import { toast } from "sonner";
+import emailjs from "emailjs-com";
 
 function Contact() {
   const [errors, setErrors] = useState({});
@@ -32,7 +33,8 @@ function Contact() {
     setErrors({});
 
     try {
-      const res = await fetch("https://formspree.io/f/xvgqpvwy", {
+      // ✅ 1. Send to Formspree
+      const formspreeRes = await fetch("https://formspree.io/f/xvgqpvwy", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,15 +43,23 @@ function Contact() {
         body: JSON.stringify({ name, email, message }),
       });
 
-      if (res.ok) {
+      // ✅ 2. Send autoresponder via EmailJS
+      const emailRes = await emailjs.send(
+        "service_gkseahc",       // 🔁 Replace with your actual EmailJS service ID
+        "template_9pa5jxo",      // 🔁 Replace with your EmailJS template ID
+        { name, email, message },
+        "FmPj_DjjBzL6gyIQy"        // 🔁 Replace with your EmailJS public key
+      );
+
+      if (formspreeRes.ok && emailRes.status === 200) {
         setSubmitted(true);
-        
         form.reset();
         setTimeout(() => setSubmitted(false), 3000);
       } else {
         toast.error("Failed to send message. Please try again.");
       }
-    } catch (err) {
+    } catch (error) {
+      console.error("Submit Error:", error);
       toast.error("Something went wrong. Please try again.");
     }
   };
@@ -93,9 +103,7 @@ function Contact() {
                     } focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200`}
                   />
                   {errors.name && (
-                    <p className="text-red-500 text-sm mt-1 ml-1">
-                      {errors.name}
-                    </p>
+                    <p className="text-red-500 text-sm mt-1 ml-1">{errors.name}</p>
                   )}
                 </div>
 
@@ -111,9 +119,7 @@ function Contact() {
                     } focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200`}
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-sm mt-1 ml-1">
-                      {errors.email}
-                    </p>
+                    <p className="text-red-500 text-sm mt-1 ml-1">{errors.email}</p>
                   )}
                 </div>
 
