@@ -43,7 +43,7 @@ function Contact() {
 
       if (res.ok) {
         setSubmitted(true);
-        toast.success("Message sent successfully!");
+        
         form.reset();
         setTimeout(() => setSubmitted(false), 3000);
       } else {
