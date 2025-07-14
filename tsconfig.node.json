@@ -3,16 +3,16 @@
   "compilerOptions": {
     "composite": true,
     "module": "esnext",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "outDir": "dist",               // ✅ Required for emit
+    "noEmit": false                 // ✅ Explicitly allow emitting
   },
   "include": [
+    "src/**/*",
     "vite.config.*",
     "vitest.config.*",
     "cypress.config.*",
-    "playwright.config.*",
-    "**/*"
+    "playwright.config.*"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

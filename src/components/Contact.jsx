@@ -11,7 +11,7 @@ function Contact() {
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value.trim();
@@ -30,10 +30,28 @@ function Contact() {
     }
 
     setErrors({});
-    setSubmitted(true);
 
-    form.reset();
-    setTimeout(() => setSubmitted(false), 3000); // Hide message after 3s
+    try {
+      const res = await fetch("https://formspree.io/f/xvgqpvwy", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        toast.success("Message sent successfully!");
+        form.reset();
+        setTimeout(() => setSubmitted(false), 3000);
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      toast.error("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -75,7 +93,9 @@ function Contact() {
                     } focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200`}
                   />
                   {errors.name && (
-                    <p className="text-red-500 text-sm mt-1 ml-1">{errors.name}</p>
+                    <p className="text-red-500 text-sm mt-1 ml-1">
+                      {errors.name}
+                    </p>
                   )}
                 </div>
 
@@ -91,7 +111,9 @@ function Contact() {
                     } focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200`}
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-sm mt-1 ml-1">{errors.email}</p>
+                    <p className="text-red-500 text-sm mt-1 ml-1">
+                      {errors.email}
+                    </p>
                   )}
                 </div>
 
