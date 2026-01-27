@@ -26,7 +26,9 @@ function Stats() {
             >
               <Card className="bg-dark/50 border-none text-center hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-8">
-                  <h3 className="text-3xl font-bold text-accent mb-2">{stat.value}</h3>
+                  <h3 className="text-3xl font-bold text-accent mb-2">
+                    {stat.value}
+                  </h3>
                   <p className="text-gray text-lg">{stat.label}</p>
                 </CardContent>
               </Card>

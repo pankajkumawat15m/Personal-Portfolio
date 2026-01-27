@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { motion } from "framer-motion";
 import { Mail, Send, User } from "lucide-react";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { toast } from "sonner";
 import emailjs from "emailjs-com";
 
@@ -45,10 +46,10 @@ function Contact() {
 
       // ✅ 2. Send autoresponder via EmailJS
       const emailRes = await emailjs.send(
-        "service_gkseahc",       // 🔁 Replace with your actual EmailJS service ID
-        "template_9pa5jxo",      // 🔁 Replace with your EmailJS template ID
+        "service_gkseahc", // 🔁 Replace with your actual EmailJS service ID
+        "template_9pa5jxo", // 🔁 Replace with your EmailJS template ID
         { name, email, message },
-        "FmPj_DjjBzL6gyIQy"        // 🔁 Replace with your EmailJS public key
+        "FmPj_DjjBzL6gyIQy", // 🔁 Replace with your EmailJS public key
       );
 
       if (formspreeRes.ok && emailRes.status === 200) {
@@ -75,96 +76,185 @@ function Contact() {
       }}
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-light mb-12"
+          className="text-center mb-12"
         >
-          Let's Connect
-        </motion.h2>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="bg-dark/70 backdrop-blur-md border border-neutral-700 shadow-2xl w-full max-w-2xl mx-auto">
-            <CardContent className="p-6 sm:p-8 text-light">
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Name Field */}
-                <div className="relative">
-                  <User className="absolute top-3 left-3 text-gray-400 h-5 w-5" />
-                  <Input
-                    name="name"
-                    placeholder="Your Name"
-                    className={`pl-10 bg-dark/30 text-light placeholder-gray-400 rounded-md border ${
-                      errors.name ? "border-red-500" : "border-neutral-600"
-                    } focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200`}
-                  />
-                  {errors.name && (
-                    <p className="text-red-500 text-sm mt-1 ml-1">{errors.name}</p>
-                  )}
-                </div>
-
-                {/* Email Field */}
-                <div className="relative">
-                  <Mail className="absolute top-3 left-3 text-gray-400 h-5 w-5" />
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    className={`pl-10 bg-dark/30 text-light placeholder-gray-400 rounded-md border ${
-                      errors.email ? "border-red-500" : "border-neutral-600"
-                    } focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200`}
-                  />
-                  {errors.email && (
-                    <p className="text-red-500 text-sm mt-1 ml-1">{errors.email}</p>
-                  )}
-                </div>
-
-                {/* Message Field */}
-                <div>
-                  <Textarea
-                    name="message"
-                    placeholder="Your Message"
-                    className={`bg-dark/30 text-light placeholder-gray-400 rounded-md border ${
-                      errors.message ? "border-red-500" : "border-neutral-600"
-                    } focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200`}
-                  />
-                  {errors.message && (
-                    <p className="text-red-500 text-sm mt-1 ml-1">
-                      {errors.message}
-                    </p>
-                  )}
-                </div>
-
-                {/* Submit Button */}
-                <motion.div whileTap={{ scale: 0.95 }}>
-                  <Button
-                    type="submit"
-                    className="bg-accent text-dark hover:bg-accent/80 w-full h-12 flex items-center justify-center gap-2 font-semibold"
-                  >
-                    <Send className="h-4 w-4" />
-                    Send Message
-                  </Button>
-                </motion.div>
-
-                {/* Inline Success Message */}
-                {submitted && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="text-green-500 text-sm mt-3 text-center"
-                  >
-                    ✅ Your message has been sent successfully!
-                  </motion.div>
-                )}
-              </form>
-            </CardContent>
-          </Card>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-light mb-3">
+            Get In Touch
+          </h2>
+          <span className="block w-16 sm:w-20 h-1 bg-accent mx-auto rounded-full mb-4" />
+          <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+            Have a project in mind or want to collaborate? Drop me a message and
+            I'll get back to you soon!
+          </p>
         </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <Card className="bg-dark/70 backdrop-blur-md border border-neutral-700 shadow-xl hover:border-accent/50 transition-all">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="text-accent text-2xl mt-1">
+                    <Mail className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-light mb-2">
+                      Email
+                    </h3>
+                    <a
+                      href="mailto:pankajkumawat@example.com"
+                      className="text-gray-300 hover:text-accent transition"
+                    >
+                      pankajkumawat@example.com
+                    </a>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-dark/70 backdrop-blur-md border border-neutral-700 shadow-xl hover:border-accent/50 transition-all">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="text-accent text-2xl mt-1">
+                    <FaLinkedin className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-light mb-2">
+                      LinkedIn
+                    </h3>
+                    <a
+                      href="https://www.linkedin.com/in/pankaj-kumawat-78395b306/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-300 hover:text-accent transition"
+                    >
+                      Connect with me
+                    </a>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-dark/70 backdrop-blur-md border border-neutral-700 shadow-xl hover:border-accent/50 transition-all">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="text-accent text-2xl mt-1">
+                    <FaGithub className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-light mb-2">
+                      GitHub
+                    </h3>
+                    <a
+                      href="https://github.com/pankajkumawat15m"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-300 hover:text-accent transition"
+                    >
+                      Check my work
+                    </a>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Card className="bg-dark/70 backdrop-blur-md border border-neutral-700 shadow-2xl hover:border-accent/30 transition-all">
+              <CardContent className="p-6 sm:p-8 text-light">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Name Field */}
+                  <div className="relative">
+                    <User className="absolute top-3 left-3 text-gray-400 h-5 w-5" />
+                    <Input
+                      name="name"
+                      placeholder="Your Name"
+                      className={`pl-10 bg-dark/30 text-light placeholder-gray-400 rounded-md border ${
+                        errors.name ? "border-red-500" : "border-neutral-600"
+                      } focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200`}
+                    />
+                    {errors.name && (
+                      <p className="text-red-500 text-sm mt-1 ml-1">
+                        {errors.name}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Email Field */}
+                  <div className="relative">
+                    <Mail className="absolute top-3 left-3 text-gray-400 h-5 w-5" />
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder="Your Email"
+                      className={`pl-10 bg-dark/30 text-light placeholder-gray-400 rounded-md border ${
+                        errors.email ? "border-red-500" : "border-neutral-600"
+                      } focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200`}
+                    />
+                    {errors.email && (
+                      <p className="text-red-500 text-sm mt-1 ml-1">
+                        {errors.email}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Message Field */}
+                  <div>
+                    <Textarea
+                      name="message"
+                      placeholder="Your Message"
+                      className={`bg-dark/30 text-light placeholder-gray-400 rounded-md border ${
+                        errors.message ? "border-red-500" : "border-neutral-600"
+                      } focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200`}
+                    />
+                    {errors.message && (
+                      <p className="text-red-500 text-sm mt-1 ml-1">
+                        {errors.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Submit Button */}
+                  <motion.div whileTap={{ scale: 0.95 }}>
+                    <Button
+                      type="submit"
+                      className="bg-accent text-dark hover:bg-accent/80 w-full h-12 flex items-center justify-center gap-2 font-semibold"
+                    >
+                      <Send className="h-4 w-4" />
+                      Send Message
+                    </Button>
+                  </motion.div>
+
+                  {/* Inline Success Message */}
+                  {submitted && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="text-green-500 text-sm mt-3 text-center"
+                    >
+                      ✅ Your message has been sent successfully!
+                    </motion.div>
+                  )}
+                </form>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

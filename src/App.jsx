@@ -1,5 +1,5 @@
-import Home from './pages/Home';
-import { Toaster } from 'sonner'; // ✅ Import Toaster
+import Home from "./pages/Home";
+import { Toaster } from "sonner"; // ✅ Import Toaster
 
 function App() {
   return (

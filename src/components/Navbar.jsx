@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
-import ThemeToggle from "./ThemeToggle"; // 🌙 Theme toggle button
+import ThemeToggle from "./ThemeToggle";
+import { Menu, X } from "lucide-react";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
-    { name: "About me", href: "#about" },
-    { name: "Experience", href: "#experience" },
+    { name: "Skills", href: "#experience" },
     { name: "Portfolio", href: "#portfolio" },
-    { name: "Contact me", href: "#contact" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
@@ -20,75 +30,99 @@ function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 w-full bg-white/70 dark:bg-dark/90 backdrop-blur-lg z-50 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 shadow-md"
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/95 dark:bg-dark/95 backdrop-blur-xl shadow-lg py-2 sm:py-3"
+          : "bg-transparent py-3 sm:py-4"
+      }`}
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo or Name */}
-        <div className="text-lg sm:text-xl lg:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-accent to-orange-400 animate-pulse">
-          Pankaj Kumawat
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        {/* Logo */}
+        <motion.a
+          href="#home"
+          whileHover={{ scale: 1.05 }}
+          className="text-xl sm:text-2xl font-bold"
+        >
+          <span className="text-accent">{"<"}</span>
+          <span className="text-gray-900 dark:text-light">PK</span>
+          <span className="text-accent">{"/>"}</span>
+        </motion.a>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-3 lg:space-x-5">
-          {navItems.map((item) => (
-            <a
+        <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
+          {navItems.map((item, index) => (
+            <motion.a
               key={item.name}
               href={item.href}
-              className="text-gray-900 dark:text-light hover:text-accent dark:hover:text-accent transition-colors text-sm lg:text-base font-medium tracking-wide hover:underline underline-offset-4"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="relative px-3 lg:px-4 py-2 text-gray-900 dark:text-light hover:text-accent dark:hover:text-accent transition-colors text-sm lg:text-base font-medium group"
             >
               {item.name}
-            </a>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
+            </motion.a>
           ))}
         </div>
 
-        {/* Actions (Theme Toggle + Hire Me) */}
-        <div className="hidden md:flex items-center gap-2">
+        {/* Actions */}
+        <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
-          <a href="#contact">
-            <Button className="bg-accent text-dark hover:bg-accent/90 h-9 sm:h-10 px-4 sm:px-6 text-sm sm:text-base rounded-full shadow-lg hover:shadow-xl transition-all">
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Button className="bg-accent text-dark hover:bg-accent/90 h-10 px-6 text-sm lg:text-base rounded-lg shadow-md hover:shadow-xl transition-all font-semibold">
               Hire Me
             </Button>
-          </a>
+          </motion.a>
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-2">
           <ThemeToggle />
-          <Button
-            variant="ghost"
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="text-gray-900 dark:text-light h-10 w-12 sm:w-14 text-xl sm:text-2xl rounded-full hover:bg-accent/20 transition-colors"
+            className="p-2 text-gray-900 dark:text-light hover:text-accent transition-colors"
             aria-label="Toggle menu"
           >
-            {isOpen ? "✕" : "☰"}
-          </Button>
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </motion.button>
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Menu */}
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="md:hidden bg-white dark:bg-dark/95 mt-3 p-4 sm:p-6 rounded-lg w-[calc(100%-2rem)] mx-auto absolute left-0 right-0 shadow-xl border border-accent/30 max-h-[80vh] overflow-y-auto"
+          className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-dark/98 backdrop-blur-xl shadow-2xl border-t border-gray-200 dark:border-gray-800"
         >
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="block py-3 px-4 text-gray-900 dark:text-light hover:text-accent text-sm sm:text-base font-medium hover:bg-accent/10 dark:hover:bg-accent/20 rounded-md transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              {item.name}
-            </a>
-          ))}
-          <div className="mt-4">
-            <a href="#contact">
-              <Button className="w-full bg-accent text-dark hover:bg-accent/90 rounded-full shadow-md">
-                Hire Me
-              </Button>
-            </a>
+          <div className="px-4 py-6 space-y-1 max-h-[70vh] overflow-y-auto">
+            {navItems.map((item, index) => (
+              <motion.a
+                key={item.name}
+                href={item.href}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="block py-3 px-4 text-gray-900 dark:text-light hover:text-accent hover:bg-accent/10 dark:hover:bg-accent/20 rounded-lg transition-all font-medium text-base"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.name}
+              </motion.a>
+            ))}
+            <div className="pt-4">
+              <a href="#contact" onClick={() => setIsOpen(false)}>
+                <Button className="w-full bg-accent text-dark hover:bg-accent/90 rounded-lg shadow-md font-semibold">
+                  Hire Me
+                </Button>
+              </a>
+            </div>
           </div>
         </motion.div>
       )}

@@ -29,18 +29,76 @@ function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center lg:text-left p-4 sm:p-8 max-w-xl"
         >
-          <p className="text-gray-400 text-lg md:text-xl mb-3 font-medium tracking-wide">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-gray-400 text-lg md:text-xl mb-3 font-medium tracking-wide"
+          >
             Hi, I am
-          </p>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-light leading-tight tracking-tight">
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-light leading-tight tracking-tight"
+          >
             Pankaj Kumawat
-          </h1>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl text-accent font-semibold mb-8">
+          </motion.h1>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="text-2xl sm:text-3xl md:text-4xl text-accent font-semibold mb-4"
+          >
             Full-Stack Developer & AI Enthusiast
-          </h2>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="text-gray-300 text-base md:text-lg mb-8 leading-relaxed"
+          >
+            Building modern web applications with MERN Stack and solving
+            real-world problems with AI/ML
+          </motion.p>
+
+          {/* Quick Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="flex gap-6 mb-8 justify-center lg:justify-start"
+          >
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-accent">
+                10+
+              </div>
+              <div className="text-xs sm:text-sm text-gray-400">Projects</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-accent">
+                1+
+              </div>
+              <div className="text-xs sm:text-sm text-gray-400">Years Exp</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-accent">
+                15+
+              </div>
+              <div className="text-xs sm:text-sm text-gray-400">
+                Technologies
+              </div>
+            </div>
+          </motion.div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-10 justify-center lg:justify-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 mb-10 justify-center lg:justify-start"
+          >
             <a
               href="#contact"
               onClick={(e) => {
@@ -70,10 +128,15 @@ function Hero() {
                 Download CV
               </Button>
             </a>
-          </div>
+          </motion.div>
 
           {/* Social Icons */}
-          <div className="flex justify-center lg:justify-start gap-6 text-gray-400 mt-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+            className="flex justify-center lg:justify-start gap-6 text-gray-400 mt-6"
+          >
             <a
               href="https://www.linkedin.com/in/pankaj-kumawat-78395b306/"
               target="_blank"
@@ -108,7 +171,7 @@ function Hero() {
             >
               <FaInstagram size={26} />
             </a>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Animated Profile Image */}

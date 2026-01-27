@@ -14,6 +14,9 @@ import {
   SiPostgresql,
   SiMysql,
   SiPython,
+  SiTailwindcss,
+  SiTypescript,
+  SiRedux,
 } from "react-icons/si";
 import { useEffect, useState } from "react";
 
@@ -75,22 +78,25 @@ const skills = [
   {
     category: "Frontend Development",
     items: [
-      { icon: <FaHtml5 />, name: "HTML", percent: 90 },
-      { icon: <FaCss3Alt />, name: "CSS", percent: 85 },
-      { icon: <FaJs />, name: "JavaScript", percent: 80 },
-      { icon: <FaReact />, name: "React", percent: 75 },
-      { icon: <FaNode />, name: "Node.js", percent: 65 },
-      { icon: <FaGithub />, name: "GitHub", percent: 80 },
+      { icon: <FaHtml5 />, name: "HTML5", percent: 90 },
+      { icon: <FaCss3Alt />, name: "CSS3", percent: 85 },
+      { icon: <FaJs />, name: "JavaScript", percent: 82 },
+      { icon: <SiTypescript />, name: "TypeScript", percent: 75 },
+      { icon: <FaReact />, name: "React.js", percent: 80 },
+      { icon: <SiRedux />, name: "Redux", percent: 70 },
+      { icon: <SiTailwindcss />, name: "Tailwind CSS", percent: 88 },
     ],
   },
   {
-    category: "Backend & Data",
+    category: "Backend & Database",
     items: [
-      { icon: <SiExpress />, name: "Express", percent: 60 },
-      { icon: <SiMongodb />, name: "MongoDB", percent: 70 },
-      { icon: <SiPostgresql />, name: "PostgreSQL", percent: 60 },
-      { icon: <SiMysql />, name: "MySQL", percent: 85 },
-      { icon: <SiPython />, name: "Python", percent: 70 },
+      { icon: <FaNode />, name: "Node.js", percent: 78 },
+      { icon: <SiExpress />, name: "Express.js", percent: 75 },
+      { icon: <SiMongodb />, name: "MongoDB", percent: 80 },
+      { icon: <SiPostgresql />, name: "PostgreSQL", percent: 65 },
+      { icon: <SiMysql />, name: "MySQL", percent: 70 },
+      { icon: <SiPython />, name: "Python", percent: 76 },
+      { icon: <FaGithub />, name: "Git & GitHub", percent: 85 },
     ],
   },
 ];
@@ -101,16 +107,32 @@ function ExperienceSection() {
       id="experience"
       className="py-12 sm:py-16 px-4 sm:px-6 lg:px-12 bg-[#2C2C2C] text-light"
     >
-      <div className="text-center mb-8 sm:mb-10">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-light relative inline-block">
-          Experience
-          <span className="block w-12 sm:w-16 h-1 bg-accent mt-2 mx-auto rounded-full" />
-        </h2>
+      <div className="text-center mb-8 sm:mb-12">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-light relative inline-block"
+        >
+          Skills & Experience
+          <span className="block w-16 sm:w-20 h-1 bg-accent mt-3 mx-auto rounded-full" />
+        </motion.h2>
+        <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base">
+          Proficient in modern web technologies with hands-on experience in
+          building full-stack applications
+        </p>
       </div>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         {skills.map((group, idx) => (
-          <div key={idx}>
-            <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-accent">
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, x: idx === 0 ? -30 : 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: idx * 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-xl sm:text-2xl font-semibold mb-5 text-accent flex items-center gap-2">
+              <span className="w-2 h-2 bg-accent rounded-full"></span>
               {group.category}
             </h3>
             <div className="space-y-4">
@@ -125,13 +147,13 @@ function ExperienceSection() {
                     delay: i * 0.05,
                   }}
                   viewport={{ once: true }}
-                  className="flex items-center gap-4 p-3 sm:p-4 bg-[#262626] rounded-lg shadow hover:shadow-[0_0_10px_#ff6a00]/40 transition-shadow"
+                  className="flex items-center gap-4 p-3 sm:p-4 bg-[#262626] rounded-lg shadow hover:shadow-[0_0_15px_rgba(255,106,0,0.3)] hover:scale-[1.02] transition-all duration-300"
                 >
                   <div className="text-accent text-xl sm:text-2xl">
                     {skill.icon}
                   </div>
                   <div className="flex-1">
-                    <p className="text-base sm:text-lg font-bold text-light">
+                    <p className="text-base sm:text-lg font-semibold text-light">
                       {skill.name}
                     </p>
                   </div>
@@ -139,11 +161,11 @@ function ExperienceSection() {
                 </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
   );
 }
 
-export default ExperienceSection; 
+export default ExperienceSection;
