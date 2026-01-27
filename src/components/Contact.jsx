@@ -114,7 +114,7 @@ function Contact() {
                       href="mailto:pankajkumawat@example.com"
                       className="text-gray-300 hover:text-accent transition"
                     >
-                      pankajkumawat@example.com
+                      pankajpkm112@gmail.com
                     </a>
                   </div>
                 </div>
