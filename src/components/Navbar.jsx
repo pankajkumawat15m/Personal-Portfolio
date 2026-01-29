@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
-import ThemeToggle from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 
 function Navbar() {
@@ -32,8 +31,8 @@ function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 dark:bg-dark/95 backdrop-blur-xl shadow-lg py-2 sm:py-3"
-          : "bg-transparent py-3 sm:py-4"
+          ? "bg-dark/98 backdrop-blur-xl shadow-lg border-b border-accent/20 py-2 sm:py-3"
+          : "bg-dark/40 backdrop-blur-sm py-3 sm:py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -67,21 +66,19 @@ function Navbar() {
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-3">
-          <ThemeToggle />
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button className="bg-accent text-dark hover:bg-accent/90 h-10 px-6 text-sm lg:text-base rounded-lg shadow-md hover:shadow-xl transition-all font-semibold">
+            <Button className="bg-accent text-white hover:bg-accent/90 h-10 px-6 text-sm lg:text-base rounded-lg shadow-md hover:shadow-xl transition-all font-semibold">
               Hire Me
             </Button>
           </motion.a>
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
+        <div className="md:hidden flex items-center">
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(!isOpen)}
@@ -99,30 +96,35 @@ function Navbar() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-dark/98 backdrop-blur-xl shadow-2xl border-t border-gray-200 dark:border-gray-800"
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="md:hidden absolute top-full left-0 right-0 bg-[#1a1a1a] backdrop-blur-xl shadow-2xl border-t border-gray-800"
         >
-          <div className="px-4 py-6 space-y-1 max-h-[70vh] overflow-y-auto">
+          <div className="px-4 py-6 space-y-2 max-h-[70vh] overflow-y-auto">
             {navItems.map((item, index) => (
               <motion.a
                 key={item.name}
                 href={item.href}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="block py-3 px-4 text-gray-900 dark:text-light hover:text-accent hover:bg-accent/10 dark:hover:bg-accent/20 rounded-lg transition-all font-medium text-base"
+                transition={{ delay: index * 0.05, ease: "easeOut" }}
+                className="block py-3.5 px-5 text-gray-200 hover:text-accent hover:bg-accent/20 rounded-lg transition-all duration-300 font-medium text-base border border-transparent hover:border-accent/50"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
               </motion.a>
             ))}
-            <div className="pt-4">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: navItems.length * 0.05 + 0.1 }}
+              className="pt-4"
+            >
               <a href="#contact" onClick={() => setIsOpen(false)}>
-                <Button className="w-full bg-accent text-dark hover:bg-accent/90 rounded-lg shadow-md font-semibold">
+                <Button className="w-full bg-accent text-white hover:bg-accent/90 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-semibold py-3.5 text-base">
                   Hire Me
                 </Button>
               </a>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       )}
