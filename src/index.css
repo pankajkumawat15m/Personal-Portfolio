@@ -1,15 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+:root {
+  /* Default: Sunset Glow */
+  --bg-dark: 18 18 20;
+  --bg-offset: 26 26 29;
+  --accent: 255 98 0;
+  --accent-rgb: 255, 98, 0;
+  --text-light: 255 255 255;
+  --text-gray: 148 163 184;
+}
+
+.theme-sunset {
+  --bg-dark: 18 18 20;
+  --bg-offset: 26 26 29;
+  --accent: 255 98 0;
+  --accent-rgb: 255, 98, 0;
+  --text-light: 255 255 255;
+  --text-gray: 148 163 184;
+}
+
+.theme-cyberpunk {
+  --bg-dark: 10 9 21;
+  --bg-offset: 16 15 32;
+  --accent: 217 70 239;
+  --accent-rgb: 217, 70, 239;
+  --text-light: 253 244 255;
+  --text-gray: 163 179 204;
+}
+
+.theme-midnight {
+  --bg-dark: 5 11 24;
+  --bg-offset: 10 18 36;
+  --accent: 59 130 246;
+  --accent-rgb: 59, 130, 246;
+  --text-light: 248 250 252;
+  --text-gray: 148 163 184;
+}
+
+.theme-emerald {
+  --bg-dark: 6 16 12;
+  --bg-offset: 12 25 19;
+  --accent: 16 185 129;
+  --accent-rgb: 16, 185, 129;
+  --text-light: 240 253 244;
+  --text-gray: 156 170 191;
+}
+
+.theme-light {
+  --bg-dark: 248 250 252;
+  --bg-offset: 238 242 246;
+  --accent: 99 102 241;
+  --accent-rgb: 99, 102, 241;
+  --text-light: 15 23 42;
+  --text-gray: 71 85 105;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  background: #1a1a1a;
-  color: #ffffff;
+  background-color: rgb(var(--bg-dark));
+  color: rgb(var(--text-light));
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  overflow-x: hidden;
+}
+
+/* Custom Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--bg-dark));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--accent) / 0.3);
+  border-radius: 5px;
+  border: 2px solid rgb(var(--bg-dark));
+  transition: background 0.3s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--accent));
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgb(var(--bg-dark) / 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgb(var(--text-light) / 0.08);
+}
+
+.glass-panel-light {
+  background: rgb(var(--text-light) / 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgb(var(--text-light) / 0.08);
 }
 
 @layer utilities {

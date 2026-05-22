@@ -8,10 +8,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        dark: '#1a1a1a', // Deep dark background
-        accent: '#ff6200', // Vibrant orange
-        light: '#ffffff', // White text
-        gray: '#4a4a4a', // Gray for secondary text
+        dark: 'rgb(var(--bg-dark) / <alpha-value>)',
+        offset: 'rgb(var(--bg-offset) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        light: 'rgb(var(--text-light) / <alpha-value>)',
+        gray: 'rgb(var(--text-gray) / <alpha-value>)',
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
